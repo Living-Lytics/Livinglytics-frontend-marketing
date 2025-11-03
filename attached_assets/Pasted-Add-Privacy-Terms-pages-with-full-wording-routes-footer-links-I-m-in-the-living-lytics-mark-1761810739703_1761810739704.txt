@@ -1,0 +1,227 @@
+Add Privacy & Terms pages (with full wording) + routes + footer links
+
+I’m in the living-lytics-marketing (Vite + React + Tailwind + shadcn/ui) app.
+Create two new pages — Privacy Policy and Terms of Service — with the exact wording below, register routes, and ensure the footer links navigate internally.
+
+1) Create pages with this exact content
+
+File: src/pages/Privacy.tsx
+
+import { useEffect } from "react";
+
+export default function Privacy() {
+  useEffect(() => { document.title = "Privacy Policy — Living Lytics"; }, []);
+  return (
+    <div className="max-w-4xl mx-auto py-16 px-6 space-y-6 text-gray-300">
+      <h1 className="text-3xl font-bold mb-2 text-white">Privacy Policy</h1>
+      <p className="text-gray-400">Last Updated: October 2025</p>
+
+      <section className="space-y-4 leading-relaxed">
+        <h2 className="text-xl font-semibold text-white mt-6">1. Overview</h2>
+        <p>
+          Living Lytics (“we,” “our,” or “us”) is committed to protecting your privacy.
+          This policy explains how we collect, use, and safeguard the personal information
+          of anyone who visits our website, uses our application, or interacts with our services.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">2. Information We Collect</h2>
+        <p>We collect information in three main ways:</p>
+        <ul className="list-disc pl-6 space-y-1">
+          <li><b>Account Information:</b> name, email address, and password when you create an account.</li>
+          <li><b>Connected Data Sources:</b> if you authorize integrations (e.g., Google Analytics 4, Instagram Business),
+              we receive analytical data and metrics from those platforms through their APIs.</li>
+          <li><b>Usage Data:</b> log data such as IP address, browser type, device information, and interaction data
+              to improve performance and security.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold text-white mt-6">3. How We Use Your Information</h2>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>Provide, maintain, and improve our analytics services.</li>
+          <li>Personalize the dashboard and automate insights.</li>
+          <li>Communicate regarding account activity, feature updates, and security notices.</li>
+          <li>Comply with legal obligations and enforce our Terms of Service.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold text-white mt-6">4. Data Security</h2>
+        <p>
+          We apply encryption, access controls, and continuous monitoring to protect your data.
+          No method of transmission is completely secure; by using our services, you acknowledge this risk.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">5. Third-Party Services</h2>
+        <p>
+          Our platform connects with external providers such as Google LLC and Meta Platforms.
+          Their data practices are governed by their own privacy policies.
+          Living Lytics is not responsible for how third parties process data once shared through authorized integrations.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">6. Your Choices and Rights</h2>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>Access or update account information at any time.</li>
+          <li>Disconnect integrated accounts from the <b>Connect</b> page.</li>
+          <li>Request deletion of your account by contacting <a href="mailto:support@livinglytics.com" className="text-blue-400">support@livinglytics.com</a>.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold text-white mt-6">7. Data Retention</h2>
+        <p>
+          We retain user data only as long as necessary to provide our services or as required by law.
+          When you close your account, your personal information and linked data sources are securely deleted
+          or anonymized within 30 days.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">8. Children’s Privacy</h2>
+        <p>
+          Our services are not directed toward individuals under 18. We do not knowingly collect data from minors.
+          If you believe a minor has provided personal information, contact us for removal.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">9. Policy Updates</h2>
+        <p>
+          We may revise this Privacy Policy periodically. Updated versions will appear on this page with a new
+          “Last Updated” date. Your continued use of Living Lytics after an update signifies acceptance of the revised policy.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">10. Contact Us</h2>
+        <p>
+          For questions about this Privacy Policy, contact&nbsp;
+          <a href="mailto:support@livinglytics.com" className="text-blue-400">support@livinglytics.com</a>.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+
+File: src/pages/Terms.tsx
+
+import { useEffect } from "react";
+
+export default function Terms() {
+  useEffect(() => { document.title = "Terms of Service — Living Lytics"; }, []);
+  return (
+    <div className="max-w-4xl mx-auto py-16 px-6 space-y-6 text-gray-300">
+      <h1 className="text-3xl font-bold mb-2 text-white">Terms of Service</h1>
+      <p className="text-gray-400">Last Updated: October 2025</p>
+
+      <section className="space-y-4 leading-relaxed">
+        <h2 className="text-xl font-semibold text-white mt-6">1. Acceptance of Terms</h2>
+        <p>
+          By accessing or using Living Lytics, you agree to these Terms of Service (“Terms”) and our Privacy Policy.
+          If you do not agree, do not use the platform.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">2. Eligibility and Accounts</h2>
+        <p>
+          You must be at least 18 years old and capable of forming a binding contract.
+          You are responsible for maintaining the confidentiality of your login credentials
+          and for all activity under your account.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">3. Use of Service</h2>
+        <p>You may use Living Lytics only for lawful business or research purposes. You agree not to:</p>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>Access data or systems without authorization.</li>
+          <li>Interfere with the platform’s functionality.</li>
+          <li>Reverse-engineer or misuse any part of the service.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold text-white mt-6">4. Integrations and Data Access</h2>
+        <p>
+          By connecting external sources (e.g., Google Analytics 4, Instagram Business), you grant Living Lytics permission
+          to retrieve and analyze information from those accounts as defined by the respective providers’ terms.
+          You may disconnect integrations at any time through your <b>Connect</b> page.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">5. Subscription Plans and Billing</h2>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>Plans are billed monthly or annually according to your selected tier.</li>
+          <li>Payments are non-refundable except as required by law.</li>
+          <li>You may cancel anytime through your account settings; access continues until the end of the paid period.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold text-white mt-6">6. Intellectual Property</h2>
+        <p>
+          All trademarks, code, designs, and content within Living Lytics remain the property of Living Lytics LLC.
+          You receive a limited, non-exclusive license to use the platform while your subscription is active.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">7. Disclaimer of Warranties</h2>
+        <p>
+          Living Lytics is provided “as is.” We make no warranties, express or implied, including merchantability,
+          fitness for a particular purpose, or non-infringement.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">8. Limitation of Liability</h2>
+        <p>
+          To the fullest extent permitted by law, Living Lytics and its affiliates are not liable for any indirect,
+          incidental, or consequential damages arising from your use of the platform or inability to access data.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">9. Termination</h2>
+        <p>
+          We may suspend or terminate your account if you violate these Terms or misuse the platform.
+          You may terminate by closing your account at any time. Certain obligations (e.g., payment or confidentiality)
+          survive termination.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">10. Changes to Terms</h2>
+        <p>
+          We may update these Terms periodically. Continued use after updates means you accept the revised Terms.
+          The effective date will appear at the top of this page.
+        </p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">11. Governing Law</h2>
+        <p>These Terms are governed by the laws of the State of California, without regard to its conflict-of-laws principles.</p>
+
+        <h2 className="text-xl font-semibold text-white mt-6">12. Contact Us</h2>
+        <p>
+          For legal or account inquiries, contact{" "}
+          <a href="mailto:support@livinglytics.com" className="text-blue-400">support@livinglytics.com</a>.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+2) Register routes
+
+Locate the app router (e.g., src/App.tsx or src/routes.tsx) and add:
+
+import Privacy from "@/pages/Privacy";
+import Terms from "@/pages/Terms";
+
+// Inside your <Routes>:
+<Route path="/privacy" element={<Privacy />} />
+<Route path="/terms" element={<Terms />} />
+
+3) Wire footer links (internal navigation)
+
+Open the footer component (e.g., src/components/Footer.(tsx|jsx)) and ensure links use the router’s <Link>:
+
+import { Link } from "react-router-dom";
+
+// Replace Privacy/Terms anchors with:
+<Link to="/privacy" className="hover:text-white">Privacy</Link>
+<Link to="/terms" className="hover:text-white">Terms</Link>
+
+4) Run & verify
+
+Restart dev server if needed: npm run dev
+
+Print the preview URL.
+
+Confirm:
+
+Clicking Privacy goes to /privacy and shows the policy.
+
+Clicking Terms goes to /terms and shows the terms.
+
+Titles update appropriately in the browser tab.
+
+Deliverables
+
+List of created/edited files.
+
+Preview URL.
+
+One-line confirmation that both routes work and footer links navigate correctly.

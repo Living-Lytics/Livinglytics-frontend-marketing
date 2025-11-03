@@ -1,0 +1,135 @@
+Context: We already created src/utils/analytics.ts with the following exports:
+
+track(event, params?)
+
+trackSignup(method: string, userId: string)
+
+trackLogin(method: string)
+
+trackOnboardingStep(step: string)
+
+trackOnboardingComplete()
+
+trackDatasourceConnection(provider: string, status: string)
+
+trackSubscription(value: number, currency: string, planTier: string, period: string, transactionId: string)
+
+trackLeadSubmit(formId: string)
+
+Task: Insert imports and callsites for these functions at the correct points in the existing React frontend. Do not add any page_view tracking (GTM handles SPA pageviews via History Change). Do not add any “schedule demo” tracking.
+
+Add imports where needed:
+
+import {
+  trackSignup,
+  trackLogin,
+  trackOnboardingStep,
+  trackOnboardingComplete,
+  trackDatasourceConnection,
+  trackSubscription,
+  trackLeadSubmit,
+} from '@/utils/analytics';
+
+
+Use the project’s alias/relative path convention (adjust @/ if needed).
+
+Identify and instrument success callbacks (don’t change logic, just append tracking after success):
+
+Signup success (e.g., handleSignupSuccess, onSignupSuccess, or the promise/await branch where user is created):
+
+// infer method from flow: 'google' if Google OAuth, else 'email'
+trackSignup(authMethod, user.id || user.uuid || String(userId));
+
+
+Login success (e.g., handleLoginSuccess, onLoginSuccess):
+
+trackLogin(authMethod);
+
+
+Onboarding step completion (where step is advanced, e.g., industry/role/purpose screens):
+
+trackOnboardingStep(currentStepKey); // e.g., 'industry' | 'role' | 'purpose'
+
+
+Onboarding finished (navigates to dashboard/connections):
+
+trackOnboardingComplete();
+
+
+Data source connection (e.g., GA4, Instagram, Meta, etc.) on success:
+
+trackDatasourceConnection(providerKey, 'success'); // providerKey e.g., 'google_analytics', 'instagram'
+
+
+On failure paths (optional):
+
+trackDatasourceConnection(providerKey, 'failure');
+
+
+Subscription confirmation (after payment/plan activation):
+
+trackSubscription(amountNumber, 'USD', planTierString, billingPeriodString, transactionIdString);
+
+
+Lead/contact form submission (marketing/contact page) on success:
+
+trackLeadSubmit(formIdString);
+
+
+Parameter derivation rules (be defensive, no PII):
+
+authMethod: 'google' if OAuth provider is Google; otherwise 'email'. Default 'email' if unknown.
+
+userId: prefer user.id → user.uuid → backend return → last-resort String(Date.now()).
+
+currentStepKey: exact step identifiers used in the UI flow ('industry', 'role', 'purpose', etc.).
+
+providerKey: canonical snake_case keys ('google_analytics', 'instagram', 'meta_ads', 'linkedin', etc.).
+
+amountNumber: numeric price (e.g., 20).
+
+planTierString: 'Starter' | 'Growth' | 'Scale' (match actual plan constant).
+
+billingPeriodString: 'monthly' | 'annual'.
+
+transactionIdString: use returned ID; fallback to a stable locally-generated UUID if not provided.
+
+formIdString: DOM/form name or component id (e.g., 'contact_hero').
+
+Never pass email, name, or other PII into tracking.
+
+Idempotence & safety:
+
+Only add one import per file; avoid duplicates.
+
+Insert calls after success checks/awaits. Do not alter return values or control flow.
+
+Guard against undefined objects (optional chaining or local guards).
+
+Files to scan and modify (examples; adjust to actual project layout):
+
+src/pages/*Signup*.tsx, src/pages/*Login*.tsx, src/features/auth/*
+
+src/features/onboarding/**/* (step components, wizard controller)
+
+src/features/integrations/**/* or src/pages/connections/* (provider connect buttons/callbacks)
+
+src/features/billing/**/*, src/pages/checkout/*, src/components/Checkout*
+
+src/pages/contact/*, src/components/forms/*
+
+Do NOT add:
+
+Any dataLayer.push directly (always use the helper).
+
+Any extra page_view pushes.
+
+Any “schedule demo” tracking (exclude entirely).
+
+Report back with:
+
+A list of files changed and the exact lines where calls were inserted.
+
+Any paths where suitable success hooks weren’t found (so we can add them later).
+
+Any assumptions made for missing parameters (e.g., how authMethod or transactionId were inferred).
